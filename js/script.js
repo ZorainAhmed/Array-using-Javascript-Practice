@@ -1,19 +1,10 @@
 var result = {};
+var count = 0;
 
 function onFormSubmit() {
     var formData = readFormData();
-    console.log(formData);
     result = formData["testInput"].match(/[^\d]+|\d+/g);
-    console.log(result.length);
-    if(result.length > 1){
-    	var i1 = result[0];
-    	var i2 = result[1];	
-    }
-    else{
-    	console.log(result);
-    }
-	
-	insertNewRecord(result);
+	insertRecord(result);
 	alert(result);
     resetForm();
 }
@@ -24,9 +15,8 @@ function readFormData() {
     return formData;
 }
 
-function insertNewRecord(result) {
+function insertRecord(result) {
     var table = document.getElementById("List").getElementsByTagName('tbody')[0];
-    var count = 0;
     for (var i = 0; i <= result.length - 1; i++) {
     	var newRow = table.insertRow(table.length+1);
     	cell1 = newRow.insertCell(0);
@@ -36,6 +26,7 @@ function insertNewRecord(result) {
     	count += 1;
     }
 }
+
 function resetForm() {
     document.getElementById("testInput").value = "";
     selectedRow = null;
